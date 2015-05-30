@@ -5,10 +5,11 @@ class window.App extends Backbone.Model
     @set 'deck', deck = new Deck()
     @set 'playerHand', deck.dealPlayer()
     @set 'dealerHand', deck.dealDealer()
+    @set 'roundResult', ''
 
   # create resolveRound function that plays out game upon player bust or stand
   resolveRound: ->
-    # reveal dealer card
+    # flip dealer's first card
     # while dealerHand.bestScore <17 && < playerHand.bestScore
       # dealer hit
     # if player's score is equal to dealer score
@@ -17,4 +18,3 @@ class window.App extends Backbone.Model
       # set this.roundResult to lose
     # else
       # set this.roundResult to win
-    # alert this.roundResult

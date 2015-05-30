@@ -10,6 +10,7 @@ class window.AppView extends Backbone.View
     'click .stand-button': -> @model.get('playerHand').stand()
 
   initialize: ->
+    # on a change to this.model.roundResult -- alert 'you' plus this.model.roundResult
     @render()
 
   render: ->

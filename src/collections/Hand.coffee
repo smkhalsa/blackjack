@@ -7,6 +7,8 @@ class window.Hand extends Backbone.Collection
 
     #if this.minScore() is less than 22
       @add(@deck.pop())
+      # if this.bestScore equals 21
+        # call this.stand()
     # else
       # call this.bust
 
