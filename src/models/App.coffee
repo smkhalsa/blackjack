@@ -7,17 +7,21 @@ class window.App extends Backbone.Model
     @set 'dealerHand', deck.dealDealer()
     @set 'roundResult', ''
 
-    # @get(playerHand).on 'resolve', resolveRound, @
-    # @get(dealerHand).on 'resolve', resolveRound, @
+    @get('playerHand').on 'resolve', @resolveRound, @
+    @get('dealerHand').on 'resolve', @resolveRound, @
   # create resolveRound function that plays out game upon player bust or stand
   resolveRound: ->
     # flip dealer's first card
-    console.log 'it worked'
-    # while dealerHand.bestScore <17 && < playerHand.bestScore
-      # dealer hit
-    # if player's score is equal to dealer score
-      # set this.roundResult to tie
-    # else if player's score is < dealer's score
-      # set this.roundResult to lose
-    # else
-      # set this.roundResult to win
+    @get('dealerHand').models[0].flip()
+    console.log 'should have flipped'
+    # while dealerHand.bestScore <17 || dealerHand.bestScore < playerHand.bestScore, dealer hit
+    @get('dealerHand').hit() while @get('dealerHand').bestScore() !=0 and (@get('dealerHand').bestScore() < 17 or @get('dealerHand').bestScore() < @get('playerHand').bestScore())
+    # if player's score is equal to dealer score set this.roundResult to tie
+    if @get('dealerHand').bestScore() == @get('playerHand').bestScore()
+      @set 'roundResult', 'tie'
+    # else if player's score is < dealer's score set this.roundResult to lose
+    else if @get('dealerHand').bestScore() > @get('playerHand').bestScore()
+      @set 'roundResult', 'lose'
+    # else set this.roundResult to win
+    else
+      @set 'roundResult', 'win'

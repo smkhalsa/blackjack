@@ -6,16 +6,19 @@ class window.Hand extends Backbone.Collection
   hit: ->
 
     #if this.minScore() is less than 22
+
     if @minScore() < 22
       @add(@deck.pop())
       # if this.bestScore equals 21
       if @bestScore() == 21
         # call this.stand()
-        @stand()
+        if !@isDealer then @stand()
+      else if @bestScore() == 0
+        if !@isDealer then @bust()
     # else
     else
       # call this.bust
-      @bust()
+      if !@isDealer then @bust()
 
   stand: ->
     # call resolveRound function
