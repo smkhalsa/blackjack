@@ -11,7 +11,8 @@ class window.AppView extends Backbone.View
 
   initialize: ->
     # on a change to this.model.roundResult -- alert 'you' plus this.model.roundResult
-    @model.on 'change:roundResult', => alert "you #{@model.get('roundResult')}", @
+    @model.on 'change:roundResult', => $('.player-hand-container').prepend "<h2>You #{@model.get('roundResult')}!</h2>", @
+    console.log @model.get('roundResult')
     @render()
 
   render: ->
