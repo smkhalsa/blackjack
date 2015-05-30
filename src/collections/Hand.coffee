@@ -6,17 +6,25 @@ class window.Hand extends Backbone.Collection
   hit: ->
 
     #if this.minScore() is less than 22
+    if @minScore() < 22
       @add(@deck.pop())
       # if this.bestScore equals 21
+      if @bestScore() == 21
         # call this.stand()
+        @stand()
     # else
+    else
       # call this.bust
+      @bust()
 
   stand: ->
     # call resolveRound function
+    @trigger('resolve')
 
   # create bust method
+  bust: ->
     # call resolveRound function
+    @trigger('resolve')
 
   hasAce: -> @reduce (memo, card) ->
     memo or card.get('value') is 1
@@ -34,8 +42,7 @@ class window.Hand extends Backbone.Collection
 
   ## set new method score
   bestScore: ->
-    # if scores[1] < 22
-      # return scores[1]
-    # else if scores[0] < 22
-      # return scores[0]
-    # else return 0
+    if @scores()[1] < 22 then @scores()[1]
+    else if @scores()[0] < 22 then @scores()[0]
+    else 0
+

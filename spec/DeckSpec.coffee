@@ -13,3 +13,17 @@ describe 'deck', ->
       assert.strictEqual deck.length, 50
       assert.strictEqual deck.last(), hand.hit().last()
       assert.strictEqual deck.length, 49
+
+  describe 'bestScore', ->
+    it 'if player scores above 21, player bestScore should yield 0', ->
+      hand.hit()
+      hand.hit()
+      hand.hit()
+      hand.hit()
+      hand.hit()
+      hand.hit()
+      hand.hit()
+      hand.hit()
+      hand.hit()
+      assert.strictEqual hand.bestScore(), 0
+
